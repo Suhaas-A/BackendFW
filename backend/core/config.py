@@ -1,5 +1,5 @@
 class Settings:
-    DATABASE_URL = 'postgresql+psycopg2://postgres:Suhaas@2278@db.ulycxfbzpiwivqmjkxfy.supabase.co:5432/postgres'
+    DATABASE_URL = 'postgresql+psycopg2://neondb_owner:npg_jPveiQL8m7fx@ep-calm-tree-adumig8l-pooler.c-2.us-east-1.aws.neon.tech/neondb?sslmode=require'
 
     API_PREFIX: str = "/api"
     DEBUG: bool = True
@@ -11,6 +11,7 @@ class Settings:
     ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 settings = Settings()
+
 
 
 
