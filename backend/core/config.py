@@ -1,5 +1,5 @@
 class Settings:
-    DATABASE_URL = 'sqlite:///./database.db'
+    DATABASE_URL = 'postgresql+psycopg2://postgres:Suhaas@2278@db.ulycxfbzpiwivqmjkxfy.supabase.co:5432/postgres'
 
     API_PREFIX: str = "/api"
     DEBUG: bool = True
@@ -11,6 +11,7 @@ class Settings:
     ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 settings = Settings()
+
 
 
 
