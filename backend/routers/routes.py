@@ -37,7 +37,6 @@ def get_user(username: str):
 
 def authenticate_user(username: str, password: str):
     user = get_user(username)
-    print('user ' + user.username + ' ' + user.password)
     if not user:
         return False
     if not verify_password(password, user.password):
@@ -342,4 +341,5 @@ def post_data(data: Test):
     db.commit()
 
     return data
+
 
