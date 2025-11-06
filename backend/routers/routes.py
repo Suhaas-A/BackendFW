@@ -173,6 +173,12 @@ def get_order(order_id: int, current_user = Depends(get_current_active_user)):
 
     return {'user': current_user, 'products': all_product_orders, 'order': order}
 
+@router.get('/product/{product_id}')
+def get_order(product_id: int, current_user = Depends(get_current_active_user)):
+    product = db.query(Products).filter(Products.id == product_id).first()
+
+    return product
+
 #Add
 @router.post('/create_order')
 def create_order(order: Order, current_user=Depends(get_current_active_user)):
@@ -341,5 +347,6 @@ def post_data(data: Test):
     db.commit()
 
     return data
+
 
 
