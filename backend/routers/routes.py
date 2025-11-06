@@ -155,7 +155,20 @@ def my_cart(current_user = Depends(get_current_active_user)):
 
     all_cart_products = db.query(ProductCart).filter(ProductCart.cart_id == cart.id).all()
 
-    return {'user': current_user, 'cart': cart, 'products': all_cart_products}
+    products_data = []
+    for cart_product in all_cart_products:
+        product = db.query(Products).filter(Products.id == cart_product.id).first()
+        _product = {}
+        _product['quantity'] = cart_product.quantity
+        _product['name'] = product.name
+        _product['price'] = product.price
+        _product['description'] = product.description
+        _product['size'] = product.size
+        _product['photo_link'] = product.photo_link
+        _product['id'] = product.id
+        products_data.append(_product)
+
+    return {'user': current_user, 'cart': cart, 'products': products_data}
 
 @router.get('/my_orders')
 def my_orders(current_user = Depends(get_current_active_user)):
@@ -348,6 +361,7 @@ def post_data(data: Test):
     db.commit()
 
     return data
+
 
 
 
