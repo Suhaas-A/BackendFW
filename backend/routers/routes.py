@@ -157,7 +157,7 @@ def my_cart(current_user = Depends(get_current_active_user)):
 
     products_data = []
     for cart_product in all_cart_products:
-        product = db.query(Products).filter(Products.id == cart_product.id).first()
+        product = db.query(Products).filter(Products.id == cart_product.product_id).first()
         _product = {}
         _product['quantity'] = cart_product.quantity
         _product['name'] = product.name
@@ -361,6 +361,7 @@ def post_data(data: Test):
     db.commit()
 
     return data
+
 
 
 
