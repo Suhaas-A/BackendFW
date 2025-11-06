@@ -305,7 +305,8 @@ def add_product_to_cart(product: Cart, current_user = Depends(get_current_active
 
 @router.post('/edit_quantity')
 def edit_quantity(product: Cart, current_user = Depends(get_current_active_user)):
-    product_to_edit = db.query(ProductCart).filter(ProductCart.cart_id == current_user.id, ProductCart.product_id == product.product_id).first()
+    cart_id = db.query(Carts).filter(Carts.user_id == current_user.id).first().id
+    product_to_edit = db.query(ProductCart).filter(ProductCart.cart_id == cart_id, ProductCart.product_id == product.product_id).first()
 
     if product_to_edit is None:
         return 'No such product found'
@@ -347,6 +348,7 @@ def post_data(data: Test):
     db.commit()
 
     return data
+
 
 
 
