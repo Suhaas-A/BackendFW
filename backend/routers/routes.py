@@ -184,7 +184,20 @@ def get_order(order_id: int, current_user = Depends(get_current_active_user)):
 
     all_product_orders = db.query(ProductOrder).filter(ProductOrder.order_id == order_id).all()
 
-    return {'user': current_user, 'products': all_product_orders, 'order': order}
+    products_data = []
+    for order_product in all_product_orders:
+        product = db.query(Products).filter(Products.id == order_product.product_id).first()
+        _product = {}
+        _product['quantity'] = order_product.quantity
+        _product['name'] = product.name
+        _product['price'] = product.price
+        _product['description'] = product.description
+        _product['size'] = product.size
+        _product['photo_link'] = product.photo_link
+        _product['id'] = product.id
+        products_data.append(_product)
+
+    return {'user': current_user, 'products': products_data, 'order': order}
 
 @router.get('/product/{product_id}')
 def get_order(product_id: int, current_user = Depends(get_current_active_user)):
@@ -361,6 +374,7 @@ def post_data(data: Test):
     db.commit()
 
     return data
+
 
 
 
